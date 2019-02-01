@@ -30,7 +30,7 @@ public class KeycloakClient {
     private final URL baseAdminUrl;
     private final String username;
     private final String password;
-    private final String clientId;
+    private final String clientKey;
     private final Charset charset;
     
     private volatile long accessTokenTime = Long.MIN_VALUE;
@@ -53,7 +53,7 @@ public class KeycloakClient {
         httpParameters.add(new BasicNameValuePair("username", username));
         httpParameters.add(new BasicNameValuePair("password", password));
         httpParameters.add(new BasicNameValuePair("grant_type", "password"));
-        httpParameters.add(new BasicNameValuePair("client_id", clientId));
+        httpParameters.add(new BasicNameValuePair("client_id", clientKey));
             
         HttpEntity requestEntity = new UrlEncodedFormEntity(httpParameters, StandardCharsets.UTF_8);
         
@@ -89,7 +89,7 @@ public class KeycloakClient {
      * @param port 
      * @param username 
      * @param password 
-     * @param clientId 
+     * @param clientKey 
      * @param charset 
      * @throws IllegalArgumentException one of:
      *   <ul>
@@ -99,12 +99,12 @@ public class KeycloakClient {
      *     <li>{@code port} is greater than 65535</li>
      *     <li>{@code username} is {@code null} or empty</li>
      *     <li>{@code password} is {@code null} or empty</li>
-     *     <li>{@code clientId} is {@code null} or empty</li>
+     *     <li>{@code clientKey} is {@code null} or empty</li>
      *     <li>{@code charset} is {@code null}</li>
      *     <li>cannot create Keycloak's base {@link URL URL} because of invalid {@code host} and/or {@code port}</li>
      *   </ul>
      */
-    public KeycloakClient(String host, int port, String username, String password, String clientId, Charset charset) {
+    public KeycloakClient(String host, int port, String username, String password, String clientKey, Charset charset) {
         KeycloakClientBuilder.checkHost(host);
         KeycloakClientBuilder.checkPort(port);
         
@@ -122,7 +122,7 @@ public class KeycloakClient {
         }
         this.username = KeycloakClientBuilder.checkUsername(username);
         this.password = KeycloakClientBuilder.checkPassword(password);
-        this.clientId = KeycloakClientBuilder.checkClientId(clientId);
+        this.clientKey = KeycloakClientBuilder.checkClientKey(clientKey);
         this.charset = KeycloakClientBuilder.checkCharset(charset);
     }
     
@@ -132,7 +132,7 @@ public class KeycloakClient {
     
     public String getPassword() { return password; }
     
-    public String getClientId() { return clientId; }
+    public String getClientKey() { return clientKey; }
     
     /**
      * <p>
@@ -162,17 +162,17 @@ public class KeycloakClient {
         );
     }
     
-    public KClientDto getClient(String realm, String id) throws IOException {
+    public KClientDto getClient(String realm, String key) throws IOException {
         return KeycloakClientEngine.loadObjectByAuthorizedGet(
                 KClientDto.class,
                 charset,
                 getAccessToken(),
-                getUrl(realm, "clients", id)
+                getUrl(realm, "clients", key)
         );
     }
     
     /**
-     * Returns map, where keys are "clientId", and values are "id". Map may be empty, and will not contain nulls as keys or values
+     * Returns map, where keys are "clientKey", and values are "clientId". Map may be empty; map will not contain nulls as keys or values (if not empty)
      * <br>
      * @param realm
      * @return

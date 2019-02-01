@@ -9,7 +9,7 @@ public class KeycloakClientBuilder {
     private int port = -1;
     private String username = null;
     private String password = null;
-    private String clientId = null;
+    private String clientKey = null;
     private Charset charset = StandardCharsets.UTF_8;
     
     /**
@@ -73,11 +73,11 @@ public class KeycloakClientBuilder {
      * 
      * @param clientId
      * @return 
-     * @throws IllegalArgumentException {@code clientId} is {@code null} or empty
+     * @throws IllegalArgumentException {@code clientKey} is {@code null} or empty
      */
-    public static String checkClientId(String clientId) {
-        if (clientId == null) throw new IllegalArgumentException("client ID is null");
-        if (clientId.isEmpty()) throw new IllegalArgumentException("client ID is empty");
+    public static String checkClientKey(String clientId) {
+        if (clientId == null) throw new IllegalArgumentException("client Key is null");
+        if (clientId.isEmpty()) throw new IllegalArgumentException("client Key is empty");
         return clientId;
     }
     
@@ -157,16 +157,16 @@ public class KeycloakClientBuilder {
         return this;
     }
     
-    public String getClientId() { return clientId; }
+    public String getClientKey() { return clientKey; }
     
     /**
      * 
      * @param clientId
      * @return 
-     * @throws IllegalArgumentException {@code clientId} is {@code null} or empty
+     * @throws IllegalArgumentException {@code clientKey} is {@code null} or empty
      */
     public KeycloakClientBuilder setClientId(String clientId) {
-        this.clientId = checkClientId(clientId);
+        this.clientKey = checkClientKey(clientId);
         return this;
     }
     
@@ -194,10 +194,10 @@ public class KeycloakClientBuilder {
      *     <li>{@link #getPort()  port} is greater than 65535</li>
      *     <li>{@link #getUsername() username} is {@code null} or empty</li>
      *     <li>{@link #getPassword() password} is {@code null} or empty</li>
-     *     <li>{@link #getClientId() clientId} is {@code null} or empty</li>
+     *     <li>{@link #getClientKey() clientKey} is {@code null} or empty</li>
      *     <li>{@link #getCharset() charset} is {@code null}</li>
      *     <li>cannot create Keycloak's base {@link URL URL} because of invalid {@link #getHost() host} and/or {@link #getPort()  port}</li>
      *   </ul>
      */
-    public KeycloakClient build() { return new KeycloakClient(host, port, username, password, clientId, charset); }
+    public KeycloakClient build() { return new KeycloakClient(host, port, username, password, clientKey, charset); }
 }
