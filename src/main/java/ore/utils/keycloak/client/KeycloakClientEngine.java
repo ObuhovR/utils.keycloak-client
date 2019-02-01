@@ -11,6 +11,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.charset.Charset;
 import static java.text.MessageFormat.format;
+import java.util.Arrays;
 import java.util.List;
 import ore.utils.keycloak.client.adapters.AccessTokenTypeAdapter;
 import ore.utils.keycloak.client.data.KAccessTokenDto;
@@ -102,7 +103,8 @@ class KeycloakClientEngine {
                         message = format("HTTP error at \"{0}\" - status {1}, reason \"{2}\"", request.getURI(), status, reason);
                     }
                     
-                    throw new IOException(message);
+                    if (status == 404) throw new KeycloakNotFoundException(message);
+                    else throw new IOException(message);
                 }
                 
                 HttpEntity entity = response.getEntity();
