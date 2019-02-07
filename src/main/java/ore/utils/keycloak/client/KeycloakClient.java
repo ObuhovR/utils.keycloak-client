@@ -11,17 +11,14 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.function.Consumer;
 import ore.utils.keycloak.client.data.KAccessTokenDto;
 import ore.utils.keycloak.client.data.KClientDto;
-import ore.utils.keycloak.client.data.KClientRoleMappingsDto;
-import ore.utils.keycloak.client.data.KMappingsDto;
+import ore.utils.keycloak.client.data.KRealm;
 import ore.utils.keycloak.client.data.KRoleDto;
 import ore.utils.keycloak.client.data.KUserDto;
 import org.apache.http.HttpEntity;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
-import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.message.BasicNameValuePair;
 
@@ -150,6 +147,15 @@ public class KeycloakClient {
     
     
     
+    // Realm-oriented methods
+    
+    public List<KRealm> getRealms() throws IOException {
+        URL url = getUrl();
+        return KeycloakClientEngine.loadObjectByAuthorizedGet(KeycloakClientEngine.REALM_LIST, charset, getAccessToken(), url);
+    }
+    
+    
+    
     // Client-oriented methods
     
     public List<KClientDto> getClients(String realm) throws IOException {
@@ -217,7 +223,7 @@ public class KeycloakClient {
         if (composite) {
             url = getUrl(realm, "users", userId, "role-mappings", "clients", clientId, "composite");
         } else {
-            url = getUrl(realm, "users", userId, "role-mappings", "clients", clientId, "composite");
+            url = getUrl(realm, "users", userId, "role-mappings", "clients", clientId);
         }
         return KeycloakClientEngine.loadObjectByAuthorizedGet(
                 KeycloakClientEngine.ROLE_LIST,

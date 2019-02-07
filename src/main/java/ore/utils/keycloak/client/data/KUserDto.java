@@ -13,7 +13,7 @@ public class KUserDto extends BaseKeycloakDto {
     public Map access;
     public Map attributes;
     public List<KUserConsentDto> clientConsents;
-    public Map clientRoles;
+    public Map<String, List<KRoleDto>> clientRoles;
     public Long createdTimestamp;
     public List<KCredentialDto> credentials;
     public List<String> disableableCredentialTypes;

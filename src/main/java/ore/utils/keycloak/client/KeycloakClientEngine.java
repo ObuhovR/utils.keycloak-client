@@ -11,11 +11,11 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.charset.Charset;
 import static java.text.MessageFormat.format;
-import java.util.Arrays;
 import java.util.List;
 import ore.utils.keycloak.client.adapters.AccessTokenTypeAdapter;
 import ore.utils.keycloak.client.data.KAccessTokenDto;
 import ore.utils.keycloak.client.data.KClientDto;
+import ore.utils.keycloak.client.data.KRealm;
 import ore.utils.keycloak.client.data.KRoleDto;
 import ore.utils.keycloak.client.data.KUserDto;
 import org.apache.http.HttpEntity;
@@ -34,6 +34,7 @@ class KeycloakClientEngine {
             .create();
     
     public static final Type CLIENT_LIST = new TypeToken<List<KClientDto>>(){}.getType();
+    public static final Type REALM_LIST = new TypeToken<List<KRealm>>(){}.getType();
     public static final Type ROLE_LIST = new TypeToken<List<KRoleDto>>(){}.getType();
     public static final Type USER_LIST = new TypeToken<List<KUserDto>>(){}.getType();
     
