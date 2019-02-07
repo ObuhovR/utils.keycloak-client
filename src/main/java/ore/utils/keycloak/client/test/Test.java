@@ -1,8 +1,5 @@
 package ore.utils.keycloak.client.test;
 
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-import java.util.HashMap;
 import java.util.List;
 import ore.utils.keycloak.client.KeycloakClient;
 import ore.utils.keycloak.client.KeycloakClientBuilder;

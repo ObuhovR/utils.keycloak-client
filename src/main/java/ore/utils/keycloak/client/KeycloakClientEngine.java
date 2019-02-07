@@ -50,7 +50,9 @@ class KeycloakClientEngine {
         if (parts.length == 0) return baseUrl;
         
         URL result = baseUrl;
-        for (int i = 0; i < parts.length; i++) result = new URL(result.toString() + '/' + parts[i]);
+        for (String part : parts) {
+            result = new URL(result.toString() + '/' + part);
+        }
         return result;
     }
     
