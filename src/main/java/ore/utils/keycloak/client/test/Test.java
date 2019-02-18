@@ -39,5 +39,12 @@ public class Test {
         
         List<KUserDto> users = client.getUsers(realm);
         LOGGER.info("user count: {}", users.size());
+        
+        for (KUserDto user: users) {
+            LOGGER.info("user: {}", user.username);
+            
+            String reg = user.getAttrByName("Регалии");
+            LOGGER.info("    reg: {}", reg);
+        }
     }
 }
