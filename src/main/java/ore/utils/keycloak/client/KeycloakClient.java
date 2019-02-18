@@ -82,12 +82,12 @@ public class KeycloakClient {
     
     /**
      * 
-     * @param host 
-     * @param port 
-     * @param username 
-     * @param password 
-     * @param clientKey 
-     * @param charset 
+     * @param host keycloak host name/IP
+     * @param port keycloak port
+     * @param username username which is used during authorization of this client in keycloak
+     * @param password password which is used during authorization of this client in keycloak
+     * @param clientKey client key which is used during authorization of this client in keycloak
+     * @param charset charset used for encoding http requests and decoding http responses
      * @throws IllegalArgumentException one of:
      *   <ul>
      *     <li>{@code host} is {@code null} or empty</li>
@@ -136,9 +136,9 @@ public class KeycloakClient {
      *   Returns string, loaded by GET request (may be json)
      * </p>
      * @param parts parts for URL creation, they will be added to base URL (which looks like "http://[host]:[port]/auth/admin/realms") with separation by '/'
-     * @return
+     * @return string representation of keycloak response
      * @throws RuntimeException some runtime error (for example - URL cannot be created by given {@code parts})
-     * @throws IOException 
+     * @throws IOException some I/O error
      */
     public String getString(String... parts) throws IOException {
         URL url = getUrl(parts);
@@ -180,9 +180,9 @@ public class KeycloakClient {
     /**
      * Returns map, where keys are "clientKey", and values are "clientId". Map may be empty; map will not contain nulls as keys or values (if not empty)
      * <br>
-     * @param realm
-     * @return
-     * @throws IOException 
+     * @param realm realm in which users search will be performed
+     * @return map "clientKey"-&gt;"clientId"
+     * @throws IOException some I/O error
      */
     public Map<String, String> getClientIdMap(String realm) throws IOException {
         Map<String, String> result = new HashMap<>();

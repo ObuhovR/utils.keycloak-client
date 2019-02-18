@@ -4,7 +4,6 @@ import com.google.gson.TypeAdapter;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonToken;
 import com.google.gson.stream.JsonWriter;
-import com.sun.org.apache.bcel.internal.Constants;
 import java.io.IOException;
 import static java.text.MessageFormat.format;
 import ore.utils.keycloak.client.data.KAccessTokenDto;

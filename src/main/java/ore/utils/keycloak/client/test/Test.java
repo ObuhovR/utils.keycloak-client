@@ -27,7 +27,7 @@ public class Test {
         KeycloakClient client = new KeycloakClientBuilder()
                 .setHost(System.getProperty("test.host"))
                 .setPort(Integer.parseInt(System.getProperty("test.port")))
-                .setClientId(System.getProperty("test.client.id"))
+                .setClientKey(System.getProperty("test.client.key"))
                 .setUsername(System.getProperty("test.username"))
                 .setPassword(System.getProperty("test.password"))
                 .build();

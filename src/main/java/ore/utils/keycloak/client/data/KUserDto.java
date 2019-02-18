@@ -47,7 +47,7 @@ public class KUserDto extends BaseKeycloakDto {
     
     /**
      * Returns first "non-null" value of attribute with given name
-     * @param name
+     * @param name attribute name
      * @return first "non-null" value of attribute with given name
      * @throws IllegalArgumentException if {@code name} is {@code null}
      */

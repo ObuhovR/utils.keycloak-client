@@ -1,5 +1,6 @@
 package ore.utils.keycloak.client;
 
+import java.net.URL;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import static java.text.MessageFormat.format;
@@ -14,8 +15,8 @@ public class KeycloakClientBuilder {
     
     /**
      * 
-     * @param host
-     * @return 
+     * @param host keycloak host
+     * @return {@code host}
      * @throws IllegalArgumentException one of:
      *   <ul>
      *     <li>{@code host} is {@code null} or empty</li>
@@ -31,8 +32,8 @@ public class KeycloakClientBuilder {
     
     /**
      * 
-     * @param port
-     * @return 
+     * @param port keycloak port
+     * @return {@code port}
      * @throws IllegalArgumentException one of:
      *   <ul>
      *     <li>{@code port} is less than 1</li>
@@ -47,8 +48,8 @@ public class KeycloakClientBuilder {
     
     /**
      * 
-     * @param username
-     * @return 
+     * @param username keycloak client's username
+     * @return {@code username}
      * @throws IllegalArgumentException {@code username} is {@code null} or empty
      */
     public static String checkUsername(String username) {
@@ -59,8 +60,8 @@ public class KeycloakClientBuilder {
     
     /**
      * 
-     * @param password
-     * @return 
+     * @param password keycloak client's password
+     * @return {@code password}
      * @throws IllegalArgumentException {@code password} is {@code null} or empty
      */
     public static String checkPassword(String password) {
@@ -71,20 +72,20 @@ public class KeycloakClientBuilder {
     
     /**
      * 
-     * @param clientId
-     * @return 
+     * @param clientKey keycloak client's key
+     * @return {@code clientKey}
      * @throws IllegalArgumentException {@code clientKey} is {@code null} or empty
      */
-    public static String checkClientKey(String clientId) {
-        if (clientId == null) throw new IllegalArgumentException("client Key is null");
-        if (clientId.isEmpty()) throw new IllegalArgumentException("client Key is empty");
-        return clientId;
+    public static String checkClientKey(String clientKey) {
+        if (clientKey == null) throw new IllegalArgumentException("client Key is null");
+        if (clientKey.isEmpty()) throw new IllegalArgumentException("client Key is empty");
+        return clientKey;
     }
     
     /**
      * 
-     * @param charset
-     * @return 
+     * @param charset charset for encoding/decoding http requests/responses
+     * @return {@code charset}
      * @throws IllegalArgumentException {@code charset} is {@code null}
      */
     public static Charset checkCharset(Charset charset) {
@@ -101,8 +102,8 @@ public class KeycloakClientBuilder {
     
     /**
      * 
-     * @param host
-     * @return 
+     * @param host keycloak host
+     * @return this builder
      * @throws IllegalArgumentException one of:
      *   <ul>
      *     <li>{@code host} is {@code null} or empty</li>
@@ -118,8 +119,8 @@ public class KeycloakClientBuilder {
     
     /**
      * 
-     * @param port
-     * @return 
+     * @param port keycloak port
+     * @return this builder
      * @throws IllegalArgumentException one of:
      *   <ul>
      *     <li>{@code port} is less than 1</li>
@@ -135,8 +136,8 @@ public class KeycloakClientBuilder {
     
     /**
      * 
-     * @param username
-     * @return 
+     * @param username keycloak client's username
+     * @return this builder
      * @throws IllegalArgumentException {@code username} is {@code null} or empty
      */
     public KeycloakClientBuilder setUsername(String username) {
@@ -148,8 +149,8 @@ public class KeycloakClientBuilder {
     
     /**
      * 
-     * @param password
-     * @return 
+     * @param password keycloak client's password
+     * @return this builder
      * @throws IllegalArgumentException {@code password} is {@code null} or empty
      */
     public KeycloakClientBuilder setPassword(String password) {
@@ -161,12 +162,12 @@ public class KeycloakClientBuilder {
     
     /**
      * 
-     * @param clientId
-     * @return 
+     * @param clientKey keycloak client's key
+     * @return this builder
      * @throws IllegalArgumentException {@code clientKey} is {@code null} or empty
      */
-    public KeycloakClientBuilder setClientId(String clientId) {
-        this.clientKey = checkClientKey(clientId);
+    public KeycloakClientBuilder setClientKey(String clientKey) {
+        this.clientKey = checkClientKey(clientKey);
         return this;
     }
     
@@ -174,8 +175,8 @@ public class KeycloakClientBuilder {
     
     /**
      * 
-     * @param charset
-     * @return 
+     * @param charset charset for encoding/deconding http requests/responses
+     * @return this builder
      * @throws IllegalArgumentException {@code charset} is {@code null}
      */
     public KeycloakClientBuilder setCharset(Charset charset) {
@@ -185,7 +186,7 @@ public class KeycloakClientBuilder {
     
     /**
      * 
-     * @return 
+     * @return keycloak client
      * @throws IllegalArgumentException one of
      *   <ul>
      *     <li>{@link #getHost() host} is {@code null} or empty</li>
