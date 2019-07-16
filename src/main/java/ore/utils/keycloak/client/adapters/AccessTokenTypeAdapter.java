@@ -65,6 +65,9 @@ public class AccessTokenTypeAdapter extends TypeAdapter<KAccessTokenDto> {
                     case SESSION_STATE:
                         sessionState = reader.nextString();
                         break;
+                    default:
+                        reader.skipValue();
+                        break;
                 }
             }
             
